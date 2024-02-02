@@ -1,5 +1,72 @@
 <div id="task-list">
   <div class="container">
-    Task list
+    <div class="head">
+      <h4>Task Management</h4>
+      <button mat-raised-button color="primary" routerLink="/create">
+        <mat-icon>add</mat-icon>
+        Create task
+      </button>
+    </div>
+    <div class="filter">
+      <mat-button-toggle-group [value]="Filter.All" (change)="filterChange($event)">
+        <mat-button-toggle [value]="Filter.All">
+          All Task
+        </mat-button-toggle>
+        <mat-button-toggle [value]="Filter.New">
+          <span class="circle-status new"></span>
+          New
+        </mat-button-toggle>
+        <mat-button-toggle [value]="Filter.InProgress">
+          <span class="circle-status progress"></span>
+          In Progress
+        </mat-button-toggle>
+        <mat-button-toggle [value]="Filter.Done">
+          <span class="circle-status done"></span>
+          Done
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+    <div class="list-item">
+      <ng-container *ngIf="!filteredTaskList.length">
+        <h5 class="no-data">No data available</h5>
+      </ng-container>
+      <div class="item" *ngFor="let item of filteredTaskList; let i = index">
+        <a [routerLink]="item.id" class="task-title">
+          <span class="circle-status" [matTooltip]="statusMapping[item.taskStatus]" [ngClass]="{'progress': item.taskStatus === 'inProgress', 'done': item.taskStatus === 'done'}"></span>
+          {{item.taskTitle}}
+        </a>
+        <div class="wrapper">
+          <p class="task-detail" [matTooltip]="item.taskDetail">{{item.taskDetail}}</p>
+          <p class="task-progress">
+            <mat-progress-spinner
+              class="circle-progress"
+              [mode]="'determinate'"
+              [value]="100"
+              [diameter]="50"
+              [strokeWidth]="3">
+            </mat-progress-spinner>
+            <mat-progress-spinner
+              class="circle"
+              [mode]="'determinate'"
+              [value]="item.taskProgress"
+              [diameter]="50"
+              [strokeWidth]="3">
+            </mat-progress-spinner>
+            <span matTooltip="Progress">{{item.taskProgress}}%</span>
+          </p>
+          <div class="controls">
+            <button class="btn-back" color="primary" mat-mini-fab matTooltip="Mark as done" (click)="markDone(item)">
+              <mat-icon>done</mat-icon>
+            </button>
+            <button class="btn-back" mat-mini-fab matTooltip="Update task" [routerLink]="item.id">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button class="btn-back" color="warn" mat-mini-fab matTooltip="Delete task" (click)="deleteTask(item, i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

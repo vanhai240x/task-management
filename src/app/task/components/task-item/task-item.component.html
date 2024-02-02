@@ -1,4 +1,56 @@
-<p>task-item works!</p>
 <div id="task-item">
-    <h3>All Items</h3>
+  <button class="btn-back" mat-icon-button matTooltip="Back to task list" routerLink="/">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <div class="container">
+    <h4 class="page-title">{{ taskId ? "Update" : "Create New" }} Task</h4>
+    <form class="form" [formGroup]="formGroup">
+      <mat-form-field appearance="outline" class="form-group">
+        <mat-label>Task title</mat-label>
+        <input
+          matInput
+          autofocus
+          id="task-title"
+          placeholder="Enter task title"
+          formControlName="taskTitle"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="form-group">
+        <mat-label>Task detail</mat-label>
+        <textarea
+          matInput
+          placeholder="Enter task detail"
+          formControlName="taskDetail"
+        ></textarea>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="form-group">
+        <mat-label>Select</mat-label>
+        <mat-select formControlName="taskStatus">
+          <mat-option *ngFor="let status of taskStatus" [value]="status.id">{{
+            status.name
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="form-group">
+        <mat-label>Task progress</mat-label>
+        <input type="number" matInput formControlName="taskProgress" />
+        <mat-icon matSuffix>percent</mat-icon>
+        <mat-hint>From 0 to 100</mat-hint>
+      </mat-form-field>
+    </form>
+    <div class="controls">
+      <button class="btn-back" mat-flat-button type="button" routerLink="/">
+        Back
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        class="btn-create"
+        type="button"
+        (click)="save()"
+      >
+        {{ taskId ? "Update" : "Create" }} task
+      </button>
+    </div>
+  </div>
 </div>

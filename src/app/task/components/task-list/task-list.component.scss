@@ -1,0 +1,132 @@
+#task-list {
+  padding: 60px 0;
+  .head {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+    h4 {
+      font-size: 24px;
+
+    }
+  }
+  .circle-status {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #FFC107;
+    margin-right: 6px;
+    &.progress {
+      background: #2196f3;
+    }
+    &.done {
+      background: #4caf50;
+    }
+  }
+  .filter {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  .list-item {
+    display: flex;
+    flex-wrap: wrap;
+    .no-data {
+      width: 100%;
+      font-size: 18px;
+      font-weight: 200;
+      margin-top: 30px;
+      text-align: center;
+    }
+    .item {
+      font-family: "Montserrat", sans-serif;
+      width: calc(33.33% - 14px);
+      padding: 20px 20px 30px;
+      background: #EEEEEE;
+      border-radius: 15px;
+      box-shadow: 0 0 12px rgba($color: #000000, $alpha: .16);
+      border: 1px solid #E0E0E0;
+      margin: 0 20px 20px 0;
+      position: relative;
+      &:nth-child(3n) {
+        margin-right: 0;
+      }
+      &:hover {
+        .controls {
+          bottom: -10px;
+          opacity: 1;
+        }
+      }
+      .task-title {
+        font-size: 18px;
+        line-height: 1.3;
+        font-weight: 500;
+        color: #000000;
+        text-decoration: none;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-bottom: 15px;
+        &:hover {
+          text-decoration: underline;
+        }
+        .task-status {
+          display: inline-block;
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          background: red;
+          margin-right: 5px;
+        }
+      }
+      .wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .task-detail {
+          max-width: calc(100% - 70px);
+          font-size: 14px;
+          line-height: 1.5;
+          display: -webkit-box;
+          -webkit-line-clamp: 5;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        .task-progress {
+          width: 50px;
+          margin-left: 20px;
+          position: relative;
+          .circle-progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+          }
+          span {
+            font-size: 14px;
+            font-weight: 600;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+          }
+        }
+      }
+      .controls {
+        position: absolute;
+        left: 10px;
+        bottom: -40px;
+        opacity: 0;
+        transition: .3s ease-in-out;
+        button {
+          margin-left: 5px;
+        }
+      }
+    }
+  }
+}
+
+:host ::ng-deep .circle-progress.mat-progress-spinner circle, .circle-progress.mat-spinner circle {
+  stroke: #fff;
+}
