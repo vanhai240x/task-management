@@ -14,8 +14,8 @@ import { TaskService } from "../../services/task.service";
 export class TaskItemComponent implements OnInit {
   formGroup = this.fb.group({
     id: new Date().getTime(),
-    taskTitle: [null, Validators.required],
-    taskDetail: [null],
+    taskTitle: [<string>(null), Validators.required],
+    taskDetail: [<string>(null)],
     taskStatus: [TaskStatus.New, Validators.required],
     taskProgress: [
       0,
@@ -81,19 +81,18 @@ export class TaskItemComponent implements OnInit {
           "Create task successfully!",
           NotifyType.Success
         );
-        // this.formGroup.patchValue({
-        //   id: new Date().getTime(),
-        //   taskTitle: null,
-        //   taskDetail: null,
-        //   taskStatus: TaskStatus.New,
-        //   taskProgress: 0,
-        // });
-        // document.getElementById("task-title").focus();
+        this.formGroup.patchValue({
+          id: new Date().getTime(),
+          taskTitle: '',
+          taskDetail: null,
+          taskStatus: TaskStatus.New,
+          taskProgress: 0,
+        });
+        this.formGroup.markAsUntouched();
         this.localStorageService.setValue(TaskService.taskStorageKey, [
           ...taskList,
           taskItem,
         ]);
-        this.router.navigateByUrl("/");
       }
     }
   }

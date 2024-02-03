@@ -127,6 +127,20 @@
   }
 }
 
+@media (max-width: 768px) {
+  #task-list {
+    .filter {
+      font-size: 14px;
+    }
+    .list-item {
+      .item {
+        width: 100%;
+        margin-right: 0;
+      }
+    }
+  }
+}
+
 :host ::ng-deep .circle-progress.mat-progress-spinner circle, .circle-progress.mat-spinner circle {
   stroke: #fff;
 }
