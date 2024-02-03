@@ -1,10 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import {BackendService} from './backend.service';
+import { BackendService } from './backend.service';
 import { Routes, RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 export const routes: Routes = [
   {
@@ -14,9 +14,7 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
@@ -24,8 +22,6 @@ export const routes: Routes = [
     MatSnackBarModule,
   ],
   providers: [BackendService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule {
-
-}
+export class AppModule {}

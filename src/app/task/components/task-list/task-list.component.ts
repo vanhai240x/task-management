@@ -10,7 +10,7 @@ import { DialogDeleteConfirmComponent } from '../dialog-delete-confirm/dialog-de
 @Component({
   selector: 'app-task-list',
   templateUrl: './task-list.component.html',
-  styleUrls: ['./task-list.component.scss']
+  styleUrls: ['./task-list.component.scss'],
 })
 export class TaskListComponent implements OnInit {
   Filter = Filter;
@@ -20,25 +20,25 @@ export class TaskListComponent implements OnInit {
     [TaskStatus.New]: TaskStatusName.New,
     [TaskStatus.InProgress]: TaskStatusName.InProgress,
     [TaskStatus.Done]: TaskStatusName.Done,
-  }
+  };
 
   constructor(
     private taskService: TaskService,
     private shareService: ShareService,
     private localStorageService: LocalStorageService,
     public dialog: MatDialog,
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.taskList = this.taskService.getTaskList();
-    this.filteredTaskList = this.taskList.map(x => x);  // Clone deep
+    this.filteredTaskList = this.taskList.map((x) => x); // Clone deep
   }
 
   filterChange($event: MatButtonToggleChange) {
     if ($event.value === Filter.All) {
-      this.filteredTaskList = this.taskList.map(x => x);
+      this.filteredTaskList = this.taskList.map((x) => x);
     } else {
-      this.filteredTaskList = this.taskList.filter(x => x.taskStatus === $event.value);
+      this.filteredTaskList = this.taskList.filter((x) => x.taskStatus === $event.value);
     }
   }
 
@@ -46,10 +46,7 @@ export class TaskListComponent implements OnInit {
     item.taskProgress = 100;
     item.taskStatus = TaskStatus.Done;
     this.localStorageService.setValue(TaskService.taskStorageKey, this.taskList);
-    this.shareService.showToast(
-      `Task ${item.taskTitle} has been completed`,
-      NotifyType.Success
-    );
+    this.shareService.showToast(`Task ${item.taskTitle} has been completed`, NotifyType.Success);
   }
 
   deleteTask(item: Task, i: number) {
@@ -57,17 +54,13 @@ export class TaskListComponent implements OnInit {
       data: item,
     });
 
-    dialogRef.afterClosed().subscribe(res => {
+    dialogRef.afterClosed().subscribe((res) => {
       if (res) {
         this.filteredTaskList.splice(i, 1);
         this.taskList.splice(i, 1);
         this.localStorageService.setValue(TaskService.taskStorageKey, this.taskList);
-        this.shareService.showToast(
-          `Task ${item.taskTitle} has been deleted`,
-          NotifyType.Success
-        );
+        this.shareService.showToast(`Task ${item.taskTitle} has been deleted`, NotifyType.Success);
       }
     });
   }
-
 }

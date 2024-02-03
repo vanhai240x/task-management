@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MatSnackBar } from "@angular/material/snack-bar";
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 export const NotifyType = {
   Success: 'success',
@@ -9,11 +9,10 @@ export const NotifyType = {
 };
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ShareService {
-
-  constructor(private snackBar: MatSnackBar) { }
+  constructor(private snackBar: MatSnackBar) {}
 
   //#region  TOAST
   showToast(message = '', type = '', duration = 3000) {
